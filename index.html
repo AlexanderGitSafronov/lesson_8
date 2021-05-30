@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+//1. Напишите функцию camelize(str), которая преобразует строки вида «my-short-string» в «myShortString».
+        var stringsInCebab = ['border-top-left-width', 'font-size', 'background-color']
+        function camelize(array){
+            return  array.map(function(item){
+                return item.split('-')
+                .map(function(word, index){
+                    if(index == 0){
+                        return word
+                    } else {
+                        return word[0].toUpperCase() + word.slice(1)
+                    }
+                })
+                .join('')
+            })
+        }
+        console.log(camelize(stringsInCebab));
+//2. Напишите свою реализацию методов map и filter. Это должна быть ф-ия, которая принимает массив и колбэк, а в рузльтате отрабатывают как соотв. методы.        
+
+        function myMap(array, callback){
+            var newArray = [];
+            for(i = 0; i < array.length; i++){
+                newArray.push(callback(array[i]))
+            }
+            return newArray
+        }
+        console.log(myMap(stringsInCebab, function(item){
+            return item.toUpperCase()
+        }));
+
+
+        function myFilter(array, callback){
+            var newArray = [];
+            for(i = 0; i < array.length; i++){
+                if(callback(array[i])){
+                    newArray.push(array[i])
+                }
+            }
+            return newArray
+        }
+        console.log(myFilter(stringsInCebab, function(item){
+            return item == 'border-top-left-width'
+        }));
+        
+    </script>
+</body>
+</html>
